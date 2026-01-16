@@ -66,17 +66,3 @@ void Form::beSigned(const Bureaucrat& bureaucrat)
 	else
 		this->sign = true;
 }
-
-void Form::signForm(const Bureaucrat& bureaucrat)
-{
-	try
-	{
-		beSigned(bureaucrat);
-		std::cout << bureaucrat.getName() << " signed " << this->getName() << std::endl;
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << this->getName()
-				  << " because " << e.what() << std::endl;
-	}
-}
