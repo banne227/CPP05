@@ -31,15 +31,20 @@ int main()
 	alice.decrementGrade();
 	std::cout << alice << std::endl;
 
-	std::cout << "== Boundary increments/decrements ==" << std::endl;
+	std::cout << "== Invalid increments/decrements ==" << std::endl;
 	Bureaucrat bob("Bob", 1);
 	bob.incrementGrade();
 	Bureaucrat dave("Dave", 150);
 	dave.decrementGrade();
 
 	std::cout << "== Invalid bureaucrat constructors ==" << std::endl;
-	try { Bureaucrat badHigh("TooHigh", 0); } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
-	try { Bureaucrat badLow("TooLow", 151); } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+	
+	try { Bureaucrat 
+		badHigh("TooHigh", 0); } 
+	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+	
+	try { Bureaucrat badLow("TooLow", 151); } 
+	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
 
 	std::cout << "\n== Forms signing ==" << std::endl;
 	Form leaveForm("Leave", 10, 5);
@@ -54,8 +59,12 @@ int main()
 	alice.signForm(urgentForm);    // should succeed (alice is grade 2 now)
 
 	std::cout << "== Invalid form constructors ==" << std::endl;
-	try { Form badFormHigh("BadHigh", 0, 10); } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
-	try { Form badFormLow("BadLow", 151, 10); } catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+	
+	try { Form badFormHigh("BadHigh", 0, 10); } 
+	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+	
+	try { Form badFormLow("BadLow", 151, 10); } 
+	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
 
 	return 0;
 }
