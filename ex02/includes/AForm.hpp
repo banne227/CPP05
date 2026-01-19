@@ -13,6 +13,9 @@
 //#                                                          #
 //############################################################
 
+#ifndef AFORM_HPP
+#define AFORM_HPP
+
 #include <string>
 #include <iostream>
 #include <exception>
@@ -69,7 +72,11 @@ class AForm
 		public:
 			const char* what() const throw()
 			{
-				return "Form cannot be executed";
+				return "he's not allowed to execute the form";
 			}
 	};
 };
+
+std::ostream& operator<<(std::ostream& os, const AForm& form);
+
+#endif

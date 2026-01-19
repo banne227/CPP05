@@ -1,4 +1,4 @@
-#include "ShrubberyCreationForm.hpp"
+#include "../includes/ShrubberyCreationForm.hpp"
 #include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
@@ -24,7 +24,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::executeAction() const
 {
-    std::ofstream outfile(target + "_shrubbery");
+    std::ofstream outfile((target + "_shrubbery").c_str());
 
     outfile << "       _-_\n"
             << "    /~~   ~~\\\n"
@@ -36,4 +36,5 @@ void ShrubberyCreationForm::executeAction() const
             << "  _ -  | |   -_\n"
             << "      // \\\\\n";
     outfile.close();
+    std::cout << "Shrubbery created at " << target + "_shrubbery" << std::endl;
 }

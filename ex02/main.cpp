@@ -14,57 +14,57 @@
 //############################################################
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 #include "includes/Bureaucrat.hpp"
-#include "includes/Form.hpp"
+#include "includes/ShrubberyCreationForm.hpp"
+#include "includes/RobotomyRequestForm.hpp"
+#include "includes/PresidentialPardonForm.hpp"
 
 int main()
 {
-	std::cout << "== Construct valid bureaucrat ==" << std::endl;
-	Bureaucrat alice("Alice", 2);
-	std::cout << alice << std::endl;
+    // Initialize random number generator
+    std::srand(std::time(NULL));
 
-	std::cout << "-- increment to top --" << std::endl;
-	alice.incrementGrade();
-	std::cout << alice << std::endl;
+    try
+    {
+        std::cout << "=== Creation of bureaucrats ===" << std::endl;
+        Bureaucrat boss("Boss", 1);
+        Bureaucrat intern("Intern", 150);
 
-	std::cout << "-- decrement back --" << std::endl;
-	alice.decrementGrade();
-	std::cout << alice << std::endl;
+        std::cout << boss << std::endl;
+        std::cout << intern << std::endl;
 
-	std::cout << "== Invalid increments/decrements ==" << std::endl;
-	Bureaucrat bob("Bob", 1);
-	bob.incrementGrade();
-	Bureaucrat dave("Dave", 150);
-	dave.decrementGrade();
+        std::cout << "\n=== Création des formulaires ===" << std::endl;
+        ShrubberyCreationForm shrub("home");
+		std::cout << shrub << std::endl;
+        RobotomyRequestForm robot("Bender");
+		std::cout << robot << std::endl;
+        PresidentialPardonForm pardon("Arthur Dent");
+		std::cout << pardon << std::endl;
 
-	std::cout << "== Invalid bureaucrat constructors ==" << std::endl;
-	
-	try { Bureaucrat 
-		badHigh("TooHigh", 0); } 
-	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
-	
-	try { Bureaucrat badLow("TooLow", 151); } 
-	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+        std::cout << "\n=== Tests de signature ===" << std::endl;
+        intern.signForm(shrub);   // OK (150 <= 145 ? no → failure)
+        boss.signForm(shrub);     // OK
 
-	std::cout << "\n== Forms signing ==" << std::endl;
-	Form leaveForm("Leave", 10, 5);
-	Form urgentForm("Urgent", 2, 2);
+        boss.signForm(robot);     // OK
+        boss.signForm(pardon);    // OK
 
-	Bureaucrat charlie("Charlie", 20);
-	charlie.signForm(leaveForm);   // too low to sign
-	charlie.signForm(urgentForm);  // too low to sign
+        std::cout << "\n=== Tests d'exécution ===" << std::endl;
 
-	std::cout << "-- Alice tries signing --" << std::endl;
-	alice.signForm(leaveForm);     // should succeed
-	alice.signForm(urgentForm);    // should succeed (alice is grade 2 now)
+        intern.executeForm(shrub); // failure (grade too low)
+        boss.executeForm(shrub);   // OK → creates the file
 
-	std::cout << "== Invalid form constructors ==" << std::endl;
-	
-	try { Form badFormHigh("BadHigh", 0, 10); } 
-	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
-	
-	try { Form badFormLow("BadLow", 151, 10); } 
-	catch (const std::exception& e) { std::cout << e.what() << std::endl; }
+        boss.executeForm(robot);   // 50% success / failure
+        boss.executeForm(robot);   // another random test
+        boss.executeForm(pardon);  // OK → pardon message
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
 
-	return 0;
+    std::cout << "\n=== End of tests ===" << std::endl;
+    return 0;
 }

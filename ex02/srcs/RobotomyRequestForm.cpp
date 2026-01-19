@@ -1,12 +1,10 @@
-#include "RobotomyRequestForm.hpp"
+#include "../includes/RobotomyRequestForm.hpp"
 #include <cstdlib>   // rand(), srand()
 #include <ctime>     // time()
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
 : AForm("RobotomyRequestForm", 72, 45), target(target)
-{
-    std::srand(std::time(0)); // Seed for randomness
-}
+{}
 
 RobotomyRequestForm::~RobotomyRequestForm() {};
 

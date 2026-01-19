@@ -76,3 +76,9 @@ void AForm::execute(Bureaucrat const& bureaucrat) const
 
 	executeAction();
 }
+
+std::ostream& operator<<(std::ostream& os, const AForm& form)
+{
+    os << "Form Name: " << form.getName() << ", Signed: " << (form.isSigned() ? "Yes" : "No") << std::endl;
+    return os;
+}

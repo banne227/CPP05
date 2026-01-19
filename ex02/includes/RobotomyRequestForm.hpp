@@ -13,3 +13,4 @@ class RobotomyRequestForm : public AForm
 
         void executeAction() const;
 };
+
