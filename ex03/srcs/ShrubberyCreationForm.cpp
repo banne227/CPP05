@@ -1,0 +1,55 @@
+//############################################################
+//#                                                          #
+//#   ██████╗ ██████╗ ███╗   ██╗                             #
+//#   ██╔══██╗╚════██╗████╗  ██║                             #
+//#   ██████╔╝ █████╔╝██╔██╗ ██║                             #
+//#   ██╔══██╗██╔═══╝ ██║╚██╗██║                             #
+//#   ██████╔╝███████╗██║ ╚████║                             #
+//#   ╚═════╝ ╚══════╝╚═╝  ╚═══╝                             #
+//#                                                          #
+//#   File    : ShrubberyCreationForm.cpp                                     #
+//#   Created : 2026-01-20 10:53                             #
+//#   Updated : 2026-01-20 10:53                             #
+//#                                                          #
+//############################################################
+
+#include "../includes/ShrubberyCreationForm.hpp"
+#include <fstream>
+
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
+: AForm("ShrubberyCreationForm", 145, 137), target(target)
+{}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {};
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+: AForm(other), target(other.target)
+{}
+
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+{
+    if (this != &other)
+    {
+        AForm::operator=(other);
+        this->target = other.target;
+    }
+    return *this;
+}
+
+void ShrubberyCreationForm::executeAction() const
+{
+    std::ofstream outfile((target + "_shrubbery").c_str());
+
+    outfile << "       _-_\n"
+            << "    /~~   ~~\\\n"
+            << " /~~         ~~\\\n"
+            << "{               }\n"
+            << " \\  _-     -_  /\n"
+            << "   ~  \\\\ //  ~\n"
+            << "_- -   | | _- _\n"
+            << "  _ -  | |   -_\n"
+            << "      // \\\\\n";
+    outfile.close();
+    std::cout << "Shrubbery created at " << target + "_shrubbery" << std::endl;
+}
