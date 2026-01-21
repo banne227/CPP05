@@ -84,11 +84,7 @@ Création d’une classe `Intern` capable de générer dynamiquement des formula
 
 ## 🛠️ Compilation & exécution
 
-Chaque exercice peut être compilé individuellement :
-
 ```bash
-c++ -Wall -Wextra -Werror -std=c++98 *.cpp -o program
-./program
 
 🚀 Compétences globales mises en pratique
 
